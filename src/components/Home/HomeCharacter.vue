@@ -1,20 +1,19 @@
 <script setup lang="ts">
-import { HomeCharacterProps } from './types';
-
-const props = defineProps<HomeCharacterProps>()
+import { HomeCharacterProps } from "./types";
+const props = defineProps<HomeCharacterProps>();
 </script>
 
 <template>
     <div class="flex gap-4 shadow p-1 justify-between rounded">
-        <img class="rounded" :src="props.image" :alt="props.name">
+        <img class="rounded" :src="props.image" :alt="props.name" />
         <div class="text-right">
-            <a class="text-xl font-bold" href=""> {{ props.name }} </a>
+            <NuxtLink class="text-xl font-bold" :href="`character/${props.id}`">{{ props.name }}</NuxtLink>
             <h3 class="">{{ props.species }}</h3>
-            <ul>
+            <dl>
                 <li v-for="(episode, index) in props.episodes.slice(0, 5)" :key="index">
-                    <a href="">Эпизод {{ episode.at(-1)! }}</a>
+                    <NuxtLink :href="`episode/${episode.at(-1)!}`">Эпизод {{ episode.at(-1)! }}</NuxtLink>
                 </li>
-            </ul>
+            </dl>
         </div>
     </div>
 </template>
